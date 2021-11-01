@@ -18,6 +18,7 @@
             placeholder="test@test.com"
             id="email"
             autocomplete="off"
+            v-model="user.email"
           />
         </div>
         <div class="input-container">
@@ -27,6 +28,7 @@
             placeholder="***************"
             id="password"
             autocomplete="off"
+            v-model="user.password"
           />
         </div>
         <div class="input-container">
@@ -38,7 +40,9 @@
             autocomplete="off"
           />
         </div>
-        <button class="action-button">Sign up</button>
+        <button class="action-button" @click.prevent="sendSignUp">
+          Sign up
+        </button>
         <p class="subtext">
           You have an account?
           <router-link to="login" class="subtext-route">Login</router-link>
@@ -49,7 +53,25 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      user: {
+        email: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    sendSignUp() {
+      this.$store.dispatch("signUp", this.user);
+      this.user = {
+        email: "",
+        password: "",
+      };
+    },
+  },
+};
 </script>
 
 <style></style>

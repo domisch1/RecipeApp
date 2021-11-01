@@ -32,6 +32,7 @@
       class="logout"
       :class="{ 'hide-element': !this.toggle }"
       v-if="true"
+      @click.prevent="sendSignOut"
     >
       Logout
     </button>
@@ -48,6 +49,9 @@ export default {
   methods: {
     toggleHamburger() {
       this.toggle = !this.toggle;
+    },
+    sendSignOut() {
+      this.$store.dispatch("signOut");
     },
   },
 };
