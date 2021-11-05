@@ -149,7 +149,14 @@ export default {
       this.amount = "";
     },
     sendRecipe() {
-      console.log(this.recipe);
+      this.$store.dispatch("createRecipe", this.recipe);
+      this.recipe = {
+        name: "",
+        category: "",
+        duration: "",
+        list: [],
+        description: "",
+      };
     },
   },
 };

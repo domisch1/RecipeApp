@@ -3,7 +3,7 @@
     <navbar></navbar>
     <section class="container-wrapper">
       <h2 class="caption">These are your Recipes.</h2>
-      <recipe v-for="(recipe, index) in recipes" :key="index">
+      <recipe v-for="(recipe, index) in this.$store.state.recipes" :key="index">
         <template v-slot:recipe-name>
           {{ recipe.name }}
         </template>
@@ -31,7 +31,7 @@
             </div>
             <div
               class="table-row-group"
-              v-for="(ingredient, index) in recipe.ingredients"
+              v-for="(ingredient, index) in recipe.list"
               :key="index"
             >
               <div class="table-row bg-gray-100">

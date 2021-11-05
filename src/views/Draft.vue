@@ -8,6 +8,7 @@
           <span class="font-main text-base">Start date</span>
           <datepicker
             v-model="dateStart"
+            :upper-limit="dateEnd"
             class="
               py-2
               px-3
@@ -51,13 +52,17 @@
               rounded
               text-white
             "
+            @click="startDraft"
           >
             Draft
           </button>
         </div>
       </div>
-      <div v-for="(recipe, index) in recipes" :key="index">
-        <span class="font-main font-semibold text-lg">Monday</span>
+      <div
+        v-for="(recipe, index) in this.$store.state.draftedRecipes"
+        :key="index"
+      >
+        <span class="font-main font-semibold text-lg"> {{ recipe.date }} </span>
         <recipe>
           <template v-slot:recipe-name>
             {{ recipe.name }}
@@ -86,7 +91,7 @@
               </div>
               <div
                 class="table-row-group"
-                v-for="(ingredient, index) in recipe.ingredients"
+                v-for="(ingredient, index) in recipe.list"
                 :key="index"
               >
                 <div class="table-row bg-gray-100">
@@ -124,59 +129,15 @@ export default {
     return {
       dateStart: new Date(),
       dateEnd: new Date(),
-      recipes: [
-        {
-          name: "Chicken with rice",
-          duration: "45 minutes",
-          category: "Omnivor",
-          ingredients: [
-            {
-              ingredient: "Chicken filet",
-              amount: 3,
-            },
-            {
-              ingredient: "Rice",
-              amount: "300g",
-            },
-            {
-              ingredient: "Water",
-              amount: "500ml",
-            },
-          ],
-          description:
-            "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-        },
-        {
-          name: "Smoothie bowl",
-          duration: "15 minutes",
-          category: "Vegan",
-          ingredients: [
-            {
-              ingredient: "Bananas",
-              amount: 2,
-            },
-            {
-              ingredient: "Apples",
-              amount: 1,
-            },
-            {
-              ingredient: "Orange",
-              amount: 1,
-            },
-            {
-              ingredient: "Almond milk",
-              amount: "200ml",
-            },
-            {
-              ingredient: "Chia seeds",
-              amount: "50g",
-            },
-          ],
-          description:
-            "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore",
-        },
-      ],
     };
+  },
+  methods: {
+    startDraft() {
+      this.$store.commit("createDraft", {
+        dateStart: this.dateStart,
+        dateEnd: this.dateEnd,
+      });
+    },
   },
 };
 </script>

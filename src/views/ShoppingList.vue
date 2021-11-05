@@ -7,7 +7,7 @@
         <template v-slot:shopping-row>
           <div
             class="table-row-group"
-            v-for="(item, index) in shoppingList"
+            v-for="(item, index) in this.$store.state.shoppingList"
             :key="index"
             :class="{ 'checked-list': item.checked }"
           >
@@ -45,25 +45,7 @@ export default {
     ShoppingListTable,
   },
   data() {
-    return {
-      shoppingList: [
-        {
-          ingredient: "Bananas",
-          amount: 4,
-          checked: false,
-        },
-        {
-          ingredient: "Apples",
-          amount: 3,
-          checked: false,
-        },
-        {
-          ingredient: "Almond milk",
-          amount: "500ml",
-          checked: false,
-        },
-      ],
-    };
+    return {};
   },
 };
 </script>
