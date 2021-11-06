@@ -78,8 +78,6 @@ const store = createStore({
       signInWithEmailAndPassword(auth, payload.email, payload.password)
         .then((user) => {
           console.log(user);
-          console.log("triggerd login");
-          context.dispatch("getRecipes");
           router.push("/create");
         })
         .catch((error) => {
