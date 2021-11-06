@@ -123,6 +123,7 @@ const store = createStore({
         if (user) {
           context.commit("setUser", user);
           context.dispatch("getRecipes");
+          console.log("trigger auth watch");
         } else {
           console.log("user signed out");
         }
