@@ -11,10 +11,10 @@ module.exports = {
         main: ["Nunito Sans", "sans-serif"],
       },
       textColor: {
-        main: "#6A4F77",
+        main: "#00000",
       },
       backgroundColor: {
-        main: "#6A4F77",
+        main: "#00000",
       },
       rotate: {
         225: "225deg",

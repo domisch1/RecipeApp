@@ -57,7 +57,7 @@ export default {
   @apply text-3xl font-main text-main mb-6;
 }
 .container-wrapper {
-  @apply px-6 md:px-28 mt-32 flex flex-col;
+  @apply px-6 md:px-28 mt-32 mb-8 flex flex-col;
 }
 
 /* COMPONENTS FOR CREATE-RECIPE */
@@ -76,6 +76,9 @@ export default {
 .input-form input {
   @apply w-full text-sm py-3 px-2.5 border border-gray-200 rounded focus:ring-offset-2 focus:ring-offset-blue-700 transition-all duration-150;
 }
+.input-form .falseValidation {
+  @apply border-red-700;
+}
 .input-form select {
   @apply w-full text-sm py-3 px-2.5 border border-gray-200 rounded focus:ring-offset-2 focus:ring-offset-blue-700 transition-all duration-150;
 }
@@ -83,9 +86,11 @@ export default {
   @apply w-full text-sm h-32 py-3 px-2.5 border border-gray-200 rounded focus:ring-offset-2 focus:ring-offset-blue-700 transition-all duration-150 resize-none;
 }
 .action-button-primary {
-  @apply text-lg font-semibold text-white py-3 w-full rounded bg-gray-600 hover:bg-gray-800 transition-all duration-150;
+  @apply text-lg font-semibold text-white py-3 w-full rounded bg-blue-700 hover:bg-blue-800 transition-all duration-150;
 }
-
+.validation {
+  @apply absolute mt-0.5 text-sm text-red-700 font-main;
+}
 /* COMPONENTS FOR RECIPE-LIST */
 .recipe {
   @apply relative flex flex-col px-2 py-4 h-[62px] md:h-[78px] md:px-4 md:py-6 mb-4 border border-gray-200 rounded-lg transition-all overflow-hidden duration-150;

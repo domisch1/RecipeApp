@@ -3,7 +3,7 @@
     <navbar></navbar>
     <section class="container-wrapper">
       <h2 class="caption">Draft your week</h2>
-      <div class="flex flex-col sm:items-end sm:flex-row mb-6">
+      <div class="flex flex-col sm:items-end sm:flex-row mb-2">
         <div class="">
           <span class="font-main text-base">Start date</span>
           <datepicker
@@ -58,6 +58,13 @@
           </button>
         </div>
       </div>
+      <p
+        class="text-sm text-red-700 mb-6 font-main"
+        v-if="this.$store.getters.draftDisabled"
+      >
+        You don't have enough different Recipes for this amount of days. Please
+        add more Recipes!
+      </p>
       <div
         v-for="(recipe, index) in this.$store.state.draftedRecipes"
         :key="index"
@@ -133,10 +140,16 @@ export default {
   },
   methods: {
     startDraft() {
-      this.$store.commit("createDraft", {
+      // cleanDraftedRecipes
+      // createDraftedRecipe
+      this.$store.dispatch("cleanDraftedRecipes", {
         dateStart: this.dateStart,
         dateEnd: this.dateEnd,
       });
+      // this.$store.commit("createDraft", {
+      //   dateStart: this.dateStart,
+      //   dateEnd: this.dateEnd,
+      // });
     },
   },
 };

@@ -12,18 +12,34 @@
               id="recipe-name"
               placeholder="Hamburger"
               v-model="recipe.name"
+              autocomplete="off"
+              @blur="checkRecipeName"
+              :class="{ falseValidation: this.recipeValidation.name }"
             />
+            <p class="validation" v-if="this.recipeValidation.name">
+              Mandatory field!
+            </p>
           </div>
         </div>
         <div class="form-container-normal">
           <div class="input-form w-49">
             <label for="category">Category</label>
-            <select name="category" id="category" v-model="recipe.category">
+            <select
+              name="category"
+              id="category"
+              class="appearance-none"
+              v-model="recipe.category"
+              @blur="checkRecipeCategory"
+              :class="{ falseValidation: this.recipeValidation.category }"
+            >
               <option value="" selected>Please choose</option>
               <option value="vegan">Vegan</option>
               <option value="vegeterian">Vegeterian</option>
               <option value="omnivor">Omnivor</option>
             </select>
+            <p class="validation" v-if="this.recipeValidation.category">
+              Mandatory field!
+            </p>
           </div>
           <div class="input-form w-49">
             <label for="duration">Duration</label>
@@ -32,7 +48,13 @@
               id="duration"
               placeholder="45 minutes"
               v-model="recipe.duration"
+              autocomplete="off"
+              @blur="checkRecipeDuration"
+              :class="{ falseValidation: this.recipeValidation.duration }"
             />
+            <p class="validation" v-if="this.recipeValidation.duration">
+              Mandatory field!
+            </p>
           </div>
         </div>
       </div>
@@ -45,7 +67,12 @@
               id="ingredient"
               placeholder="Patties"
               v-model="this.ingredient"
+              autocomplete="off"
+              :class="{ falseValidation: this.recipeValidation.ingredient }"
             />
+            <p class="validation" v-if="this.recipeValidation.ingredient">
+              Mandatory field!
+            </p>
           </div>
         </div>
         <div class="form-container-normal">
@@ -57,7 +84,13 @@
               id="amount"
               placeholder="3"
               v-model="this.amount"
+              autocomplete="off"
+              :class="{ falseValidation: this.recipeValidation.amount }"
+              @keydown.enter="checkRecipeIngredient"
             />
+            <p class="validation" v-if="this.recipeValidation.amount">
+              Mandatory field!
+            </p>
           </div>
           <button
             style="height: 46px"
@@ -72,14 +105,31 @@
               transition-all
               duration-150
             "
-            @click.prevent="addIngredient"
+            @click.prevent="checkRecipeIngredient"
           >
             Add
           </button>
         </div>
       </div>
       <div class="form-row">
-        <div class="form-container-normal items-start">
+        <div class="w-full">
+          <div class="input-form">
+            <label for="description">Description</label>
+            <textarea
+              name="description"
+              id="description"
+              v-model="recipe.description"
+              @blur="checkRecipeDescription"
+              :class="{ falseValidation: this.recipeValidation.description }"
+            ></textarea>
+            <p class="validation" v-if="this.recipeValidation.description">
+              Mandatory field!
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="w-full">
           <div class="table w-full mb-6">
             <div class="table-row-group text-white font-semibold bg-gray-800">
               <div class="table-row text-center">
@@ -97,16 +147,6 @@
                 <div class="table-cell py-3">{{ ingredients.amount }}</div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="form-container-normal items-start">
-          <div class="input-form">
-            <label for="description">Description</label>
-            <textarea
-              name="description"
-              id="description"
-              v-model="recipe.description"
-            ></textarea>
           </div>
         </div>
       </div>
@@ -135,6 +175,14 @@ export default {
         list: [],
         description: "",
       },
+      recipeValidation: {
+        name: false,
+        category: false,
+        duration: false,
+        ingredient: false,
+        amount: false,
+        description: false,
+      },
       ingredient: "",
       amount: "",
     };
@@ -157,6 +205,49 @@ export default {
         list: [],
         description: "",
       };
+    },
+    checkRecipeName() {
+      if (this.recipe.name.length === 0) {
+        this.recipeValidation.name = true;
+      } else {
+        this.recipeValidation.name = false;
+      }
+    },
+    checkRecipeCategory() {
+      if (this.recipe.category.length === 0) {
+        this.recipeValidation.category = true;
+      } else {
+        this.recipeValidation.category = false;
+      }
+    },
+    checkRecipeDuration() {
+      if (this.recipe.duration.length === 0) {
+        this.recipeValidation.duration = true;
+      } else {
+        this.recipeValidation.duration = false;
+      }
+    },
+    checkRecipeIngredient() {
+      if (this.ingredient.length === 0) {
+        this.recipeValidation.ingredient = true;
+      } else {
+        this.recipeValidation.ingredient = false;
+      }
+      if (this.amount.length === 0) {
+        this.recipeValidation.amount = true;
+      } else {
+        this.recipeValidation.amount = false;
+      }
+      if (this.ingredient.length > 0 && this.amount.length > 0) {
+        this.addIngredient();
+      }
+    },
+    checkRecipeDescription() {
+      if (this.recipe.description.length === 0) {
+        this.recipeValidation.description = true;
+      } else {
+        this.recipeValidation.description = false;
+      }
     },
   },
 };

@@ -20,6 +20,12 @@
             autocomplete="off"
             v-model="user.email"
           />
+          <p
+            class="text-sm text-red-700 mt-2 font-main"
+            v-if="this.formValidation.wrongEmail"
+          >
+            Please enter a valid E-Mail adress.
+          </p>
         </div>
         <div class="input-container">
           <label for="password">Password</label>
@@ -30,8 +36,14 @@
             autocomplete="off"
             v-model="user.password"
           />
+          <p
+            class="text-sm text-red-700 mt-2 font-main"
+            v-if="this.formValidation.wrongPassword"
+          >
+            Your password must be at least 6 characters long.
+          </p>
         </div>
-        <button class="action-button" @click.prevent="sendLogin">Login</button>
+        <button class="action-button" @click.prevent="checkForm">Login</button>
         <p class="subtext">
           Don' have an account?
           <router-link to="signup" class="subtext-route">Sign up</router-link>
@@ -49,6 +61,10 @@ export default {
         email: "",
         password: "",
       },
+      formValidation: {
+        wrongEmail: false,
+        wrongPassword: false,
+      },
     };
   },
   methods: {
@@ -58,6 +74,22 @@ export default {
         email: "",
         password: "",
       };
+    },
+    checkForm() {
+      this.formValidation = {
+        wrongEmail: false,
+        wrongPassword: false,
+        wrongConfirmPassword: false,
+      };
+      if (!this.user.email.includes("@")) {
+        this.formValidation.wrongEmail = true;
+        console.log("Email");
+      } else if (this.user.password < 6) {
+        this.formValidation.wrongPassword = true;
+        console.log("Pass");
+      } else {
+        this.sendLogin();
+      }
     },
   },
 };

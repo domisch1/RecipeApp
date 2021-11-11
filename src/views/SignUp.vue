@@ -20,6 +20,12 @@
             autocomplete="off"
             v-model="user.email"
           />
+          <p
+            class="text-sm text-red-700 mt-2 font-main"
+            v-if="this.formValidation.wrongEmail"
+          >
+            Please enter a valid E-Mail adress.
+          </p>
         </div>
         <div class="input-container">
           <label for="password">Password</label>
@@ -30,6 +36,12 @@
             autocomplete="off"
             v-model="user.password"
           />
+          <p
+            class="text-sm text-red-700 mt-2 font-main"
+            v-if="this.formValidation.wrongPassword"
+          >
+            Your password must be at least 6 characters long.
+          </p>
         </div>
         <div class="input-container">
           <label for="confirm-password">Confirm Password</label>
@@ -38,9 +50,16 @@
             placeholder="***************"
             id="confirm-password"
             autocomplete="off"
+            v-model="this.user.confirmPassword"
           />
+          <p
+            class="text-sm text-red-700 mt-2 font-main"
+            v-if="this.formValidation.wrongConfirmPassword"
+          >
+            Must be the same value as password.
+          </p>
         </div>
-        <button class="action-button" @click.prevent="sendSignUp">
+        <button class="action-button" @click.prevent="checkForm">
           Sign up
         </button>
         <p class="subtext">
@@ -59,6 +78,12 @@ export default {
       user: {
         email: "",
         password: "",
+        confirmPassword: "",
+      },
+      formValidation: {
+        wrongEmail: false,
+        wrongPassword: false,
+        wrongConfirmPassword: false,
       },
     };
   },
@@ -68,7 +93,26 @@ export default {
       this.user = {
         email: "",
         password: "",
+        confirmPassword: "",
       };
+    },
+    checkForm() {
+      this.formValidation = {
+        wrongEmail: false,
+        wrongPassword: false,
+        wrongConfirmPassword: false,
+      };
+      if (!this.user.email.includes("@")) {
+        this.formValidation.wrongEmail = true;
+        console.log("Email");
+      } else if (this.user.password < 6) {
+        this.formValidation.wrongPassword = true;
+        console.log("Pass");
+      } else if (this.user.confirmPassword !== this.user.password) {
+        this.formValidation.wrongConfirmPassword = true;
+      } else {
+        this.sendSignUp();
+      }
     },
   },
 };
