@@ -1,12 +1,6 @@
 <template>
   <section id="sign-up" class="wrapper">
-    <section id="cover-image" class="cover-image-container">
-      <img
-        src="../assets/SimpleShiny.svg"
-        alt="Background"
-        class="cover-image"
-      />
-    </section>
+    <section id="cover-image" class="cover-image-container"></section>
     <section id="sign-up-form" class="form-container">
       <form action="" class="form">
         <h2 class="form-caption">Create your Account.</h2>
@@ -20,10 +14,7 @@
             autocomplete="off"
             v-model="user.email"
           />
-          <p
-            class="text-sm text-red-700 mt-2 font-main"
-            v-if="this.formValidation.wrongEmail"
-          >
+          <p class="error-msg" v-if="formValidation.wrongEmail">
             Please enter a valid E-Mail adress.
           </p>
         </div>
@@ -36,10 +27,7 @@
             autocomplete="off"
             v-model="user.password"
           />
-          <p
-            class="text-sm text-red-700 mt-2 font-main"
-            v-if="this.formValidation.wrongPassword"
-          >
+          <p class="error-msg" v-if="formValidation.wrongPassword">
             Your password must be at least 6 characters long.
           </p>
         </div>
@@ -52,10 +40,7 @@
             autocomplete="off"
             v-model="this.user.confirmPassword"
           />
-          <p
-            class="text-sm text-red-700 mt-2 font-main"
-            v-if="this.formValidation.wrongConfirmPassword"
-          >
+          <p class="error-msg" v-if="formValidation.wrongConfirmPassword">
             Must be the same value as password.
           </p>
         </div>

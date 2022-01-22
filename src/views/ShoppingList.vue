@@ -3,15 +3,21 @@
     <navbar></navbar>
     <section class="container-wrapper">
       <h2 class="caption">This is your shopping list</h2>
-      <shopping-list-table>
+      <h3
+        class="text-xl font-main"
+        v-if="this.$store.state.draftedRecipes.length === 0"
+      >
+        You need to draft recipes before you can see your shopping list.
+      </h3>
+      <shopping-list-table v-if="this.$store.state.draftedRecipes.length > 0">
         <template v-slot:shopping-row>
           <div
             class="table-row-group"
             v-for="(item, index) in this.$store.state.shoppingList"
             :key="index"
-            :class="{ 'checked-list': item.checked }"
+            :class="{ 'opacity-50': item.checked }"
           >
-            <div class="table-row bg-gray-200">
+            <div class="table-row gradient-light">
               <div class="table-cell text-center py-3">
                 {{ item.ingredient }}
               </div>
@@ -50,8 +56,4 @@ export default {
 };
 </script>
 
-<style>
-.checked-list {
-  @apply opacity-50;
-}
-</style>
+<style></style>

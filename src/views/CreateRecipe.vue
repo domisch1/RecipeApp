@@ -1,5 +1,5 @@
 <template>
-  <section id="create-recipe">
+  <section>
     <navbar></navbar>
     <section class="container-wrapper">
       <h2 class="caption">Create your Recipe.</h2>
@@ -14,9 +14,9 @@
               v-model="recipe.name"
               autocomplete="off"
               @blur="checkRecipeName"
-              :class="{ falseValidation: this.recipeValidation.name }"
+              :class="{ falseValidation: recipeValidation.name }"
             />
-            <p class="validation" v-if="this.recipeValidation.name">
+            <p class="validation" v-if="recipeValidation.name">
               Mandatory field!
             </p>
           </div>
@@ -30,14 +30,14 @@
               class="appearance-none"
               v-model="recipe.category"
               @blur="checkRecipeCategory"
-              :class="{ falseValidation: this.recipeValidation.category }"
+              :class="{ falseValidation: recipeValidation.category }"
             >
               <option value="" selected>Please choose</option>
               <option value="vegan">Vegan</option>
               <option value="vegeterian">Vegeterian</option>
               <option value="omnivor">Omnivor</option>
             </select>
-            <p class="validation" v-if="this.recipeValidation.category">
+            <p class="validation" v-if="recipeValidation.category">
               Mandatory field!
             </p>
           </div>
@@ -50,9 +50,9 @@
               v-model="recipe.duration"
               autocomplete="off"
               @blur="checkRecipeDuration"
-              :class="{ falseValidation: this.recipeValidation.duration }"
+              :class="{ falseValidation: recipeValidation.duration }"
             />
-            <p class="validation" v-if="this.recipeValidation.duration">
+            <p class="validation" v-if="recipeValidation.duration">
               Mandatory field!
             </p>
           </div>
@@ -66,11 +66,11 @@
               type="text"
               id="ingredient"
               placeholder="Patties"
-              v-model="this.ingredient"
+              v-model="ingredient"
               autocomplete="off"
-              :class="{ falseValidation: this.recipeValidation.ingredient }"
+              :class="{ falseValidation: recipeValidation.ingredient }"
             />
-            <p class="validation" v-if="this.recipeValidation.ingredient">
+            <p class="validation" v-if="recipeValidation.ingredient">
               Mandatory field!
             </p>
           </div>
@@ -83,28 +83,18 @@
               name="amount"
               id="amount"
               placeholder="3"
-              v-model="this.amount"
+              v-model="amount"
               autocomplete="off"
-              :class="{ falseValidation: this.recipeValidation.amount }"
+              :class="{ falseValidation: recipeValidation.amount }"
               @keydown.enter="checkRecipeIngredient"
             />
-            <p class="validation" v-if="this.recipeValidation.amount">
+            <p class="validation" v-if="recipeValidation.amount">
               Mandatory field!
             </p>
           </div>
           <button
             style="height: 46px"
-            class="
-              inline-block
-              text-white text-base
-              rounded
-              w-49
-              font-semibold
-              bg-green-500
-              hover:bg-green-700
-              transition-all
-              duration-150
-            "
+            class="inline-block text-white text-base rounded w-49 font-semibold bg-green-500 hover:bg-green-700 transition-all duration-150"
             @click.prevent="checkRecipeIngredient"
           >
             Add
@@ -120,18 +110,23 @@
               id="description"
               v-model="recipe.description"
               @blur="checkRecipeDescription"
-              :class="{ falseValidation: this.recipeValidation.description }"
+              :class="{ falseValidation: recipeValidation.description }"
             ></textarea>
-            <p class="validation" v-if="this.recipeValidation.description">
+            <p class="validation" v-if="recipeValidation.description">
               Mandatory field!
             </p>
           </div>
         </div>
       </div>
-      <div class="form-row">
+      <div class="form-row mb-10 mt-2">
+        <button class="action-button-primary" @click.prevent="sendRecipe">
+          Save Recipe
+        </button>
+      </div>
+      <div class="form-row" v-if="recipe.list.length > 0">
         <div class="w-full">
           <div class="table w-full mb-6">
-            <div class="table-row-group text-white font-semibold bg-gray-800">
+            <div class="table-row-group font-semibold gradient-dark">
               <div class="table-row text-center">
                 <div class="table-cell py-3">Ingredients</div>
                 <div class="table-cell py-3">Amount</div>
@@ -139,7 +134,7 @@
             </div>
             <div class="table-row-group">
               <div
-                class="table-row text-center bg-gray-100"
+                class="table-row text-center gradient-light"
                 v-for="(ingredients, index) in recipe.list"
                 :key="index"
               >
@@ -149,11 +144,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="form-row mb-10">
-        <button class="action-button-primary" @click.prevent="sendRecipe">
-          Save Recipe
-        </button>
       </div>
     </section>
   </section>

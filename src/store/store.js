@@ -247,6 +247,12 @@ const store = createStore({
           context.commit("setRecipes", snap);
         }
       );
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+        } else {
+          sub();
+        }
+      });
     },
     async getDraftedRecipes(context) {
       const sub = await getDocs(

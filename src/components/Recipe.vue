@@ -1,28 +1,28 @@
 <template>
-  <div class="recipe" :class="{ 'recipe-open': this.toggleRecipe }">
-    <div class="recipe-header">
-      <h3 class="recipe-caption"><slot name="recipe-name"></slot></h3>
+  <div class="recipe" :class="{ 'recipe-open': toggleRecipe }">
+    <div
+      class="relative flex flex-row items-center pb-6 border-b border-gray-500"
+    >
+      <h3 class="text-xl">
+        <slot name="recipe-name"></slot>
+      </h3>
       <img
         src="../assets/Icons/ShevronDown.svg"
         alt="Arrow"
-        class="recipe-icon"
+        class="absolute right-0 h-6 w-6 cursor-pointer transition-all duration-150"
         @click="openRecipe"
-        :class="{ 'turn-arrow': this.toggleRecipe }"
+        :class="{ 'turn-arrow': toggleRecipe }"
       />
     </div>
-    <div class="recipe-content">
-      <div class="relative mb-3">
-        <span class="recipe-duration"
-          ><slot name="recipe-duration"></slot
-        ></span>
-        <span class="recipe-category"
-          ><slot name="recipe-category"></slot
-        ></span>
+    <div class="relative flex flex-col mt-4">
+      <div class="relative mb-3 flex justify-between w-full">
+        <span><slot name="recipe-duration"></slot></span>
+        <span><slot name="recipe-category"></slot></span>
       </div>
       <slot name="table-container"></slot>
       <div class="relative">
-        <p class="font-main font-semibold mb-2">Description</p>
-        <p class="font-main"><slot name="recipe-description"></slot></p>
+        <p class="font-semibold mb-2">Description</p>
+        <p><slot name="recipe-description"></slot></p>
       </div>
     </div>
   </div>
@@ -43,8 +43,4 @@ export default {
 };
 </script>
 
-<style>
-.turn-arrow {
-  @apply transform rotate-180;
-}
-</style>
+<style></style>

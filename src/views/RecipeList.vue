@@ -3,6 +3,12 @@
     <navbar></navbar>
     <section class="container-wrapper">
       <h2 class="caption">These are your Recipes.</h2>
+      <h3
+        class="text-xl font-main"
+        v-if="this.$store.state.recipes.length === 0"
+      >
+        Seems like you don't have any recipes added yet. Go and add some!
+      </h3>
       <recipe v-for="(recipe, index) in this.$store.state.recipes" :key="index">
         <template v-slot:recipe-name>
           {{ recipe.name }}
@@ -16,7 +22,7 @@
         <template v-slot:table-container>
           <div class="table w-full font-main mb-4">
             <div class="table-row-group">
-              <div class="table-row bg-gray-800">
+              <div class="table-row gradient-dark">
                 <div
                   class="table-cell text-center font-semibold text-white py-2"
                 >
@@ -34,7 +40,7 @@
               v-for="(ingredient, index) in recipe.list"
               :key="index"
             >
-              <div class="table-row bg-gray-100">
+              <div class="table-row gradient-light">
                 <div class="table-cell text-center py-2">
                   {{ ingredient.ingredient }}
                 </div>
@@ -60,58 +66,7 @@ import Recipe from "../components/Recipe.vue";
 export default {
   data() {
     return {
-      recipes: [
-        {
-          name: "Chicken with rice",
-          duration: "45 minutes",
-          category: "Omnivor",
-          ingredients: [
-            {
-              ingredient: "Chicken filet",
-              amount: 3,
-            },
-            {
-              ingredient: "Rice",
-              amount: "300g",
-            },
-            {
-              ingredient: "Water",
-              amount: "500ml",
-            },
-          ],
-          description:
-            "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-        },
-        {
-          name: "Smoothie bowl",
-          duration: "15 minutes",
-          category: "Vegan",
-          ingredients: [
-            {
-              ingredient: "Bananas",
-              amount: 2,
-            },
-            {
-              ingredient: "Apples",
-              amount: 1,
-            },
-            {
-              ingredient: "Orange",
-              amount: 1,
-            },
-            {
-              ingredient: "Almond milk",
-              amount: "200ml",
-            },
-            {
-              ingredient: "Chia seeds",
-              amount: "50g",
-            },
-          ],
-          description:
-            "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore",
-        },
-      ],
+      recipes: [],
     };
   },
   components: {

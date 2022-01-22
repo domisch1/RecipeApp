@@ -1,12 +1,6 @@
 <template>
-  <section id="login" class="wrapper">
-    <section id="cover-image" class="cover-image-container">
-      <img
-        src="../assets/SimpleShiny.svg"
-        alt="Background"
-        class="cover-image"
-      />
-    </section>
+  <section class="wrapper">
+    <section class="cover-image-container"></section>
     <section id="login-form" class="form-container">
       <form action="" class="form">
         <h2 class="form-caption">Login to your Account.</h2>
@@ -22,7 +16,7 @@
           />
           <p
             class="text-sm text-red-700 mt-2 font-main"
-            v-if="this.formValidation.wrongEmail"
+            v-if="formValidation.wrongEmail"
           >
             Please enter a valid E-Mail adress.
           </p>
@@ -36,10 +30,7 @@
             autocomplete="off"
             v-model="user.password"
           />
-          <p
-            class="text-sm text-red-700 mt-2 font-main"
-            v-if="this.formValidation.wrongPassword"
-          >
+          <p class="error-msg" v-if="formValidation.wrongPassword">
             Your password must be at least 6 characters long.
           </p>
         </div>

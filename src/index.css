@@ -1,3 +1,121 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    /* ***** GRADIENTS ***** */
+    .gradient-dark {
+        @apply bg-gradient-to-r from-indigo-800 to-blue-700 text-white
+    }
+    .gradient-light {
+        @apply bg-gradient-to-r from-indigo-500 to-blue-400 text-white
+    }
+    /* ***** BASE COMPONENTS ***** */
+    .container-wrapper {
+        @apply px-6 md:px-28 mt-32 mb-8 flex flex-col font-main;
+    }
+    .caption {
+        @apply text-3xl font-main text-main mb-6;
+    }
+    /* ***** COMPONENTS FOR NAVBAR ***** */
+    .hamburger-line {
+        @apply block h-1 w-full rounded bg-white transition duration-150;
+    }
+    .first {
+        @apply transform -rotate-45 origin-top-right -translate-y-2 -translate-x-1;
+    }
+    .third {
+        @apply transform rotate-45 origin-top-right translate-y-1;
+    }
+    .nav-link {
+        @apply mb-8 md:mb-0 md:mr-8 text-main font-main text-lg font-semibold;
+    }
+    .hide-element {
+        @apply opacity-0 z-0 md:opacity-100 md:z-10 transform -translate-y-full md:transform-none;
+    }
+    /* ***** COMPONENTS FOR RECIPE ***** */
+    .recipe {
+        @apply relative flex flex-col font-main px-2 py-4 h-[62px] md:h-[78px] md:px-4 md:py-6 mb-4 border border-gray-200 rounded-lg transition-all overflow-hidden duration-150;
+    }
+    .recipe-open {
+        @apply h-80 overflow-scroll;
+    } 
+    .turn-arrow {
+        @apply transform rotate-180;
+    }
+    /* ***** COMPONENTS FOR TABLE ***** */
+    .table-cell-centered {
+        @apply table-cell py-3 text-center
+    }
+    /* ***** COMPONENTS FOR FORMS ***** */
+    .form-row {
+        @apply flex flex-col md:flex-row justify-between;
+    }
+    .form-container-normal {
+        @apply flex justify-between items-center w-full md:w-49 px-0;
+    }
+    .input-form {
+        @apply w-full mb-6;
+    }
+    .input-form label {
+        @apply text-sm mb-1;
+    }
+    .input-form input {
+        @apply w-full text-sm py-3 px-2.5 border border-gray-200 rounded focus:ring-offset-2 focus:ring-offset-blue-700 transition-all duration-150;
+    }
+    .input-form .falseValidation {
+        @apply border-red-700;
+    }
+    .input-form select {
+        @apply w-full text-sm py-3 px-2.5 border border-gray-200 rounded focus:ring-offset-2 focus:ring-offset-blue-700 transition-all duration-150;
+    }
+    .input-form textarea {
+        @apply w-full text-sm h-32 py-3 px-2.5 border border-gray-200 rounded focus:ring-offset-2 focus:ring-offset-blue-700 transition-all duration-150 resize-none;
+    }
+    .action-button-primary {
+        @apply text-lg font-semibold text-white py-3 w-full rounded bg-blue-700 hover:bg-blue-800 transition-all duration-150;
+    }
+    .validation {
+        @apply absolute mt-0.5 text-sm text-red-700 font-main;
+    }
+    /* ***** COMPONENTS FOR LOGIN & SIGNUP ***** */
+    .wrapper {
+        @apply flex flex-col lg:flex-row p-0 lg:p-2 lg:h-screen font-main;
+    }
+    .cover-image-container {
+        @apply flex justify-center items-center h-64 lg:h-full lg:rounded-lg lg:w-8/12 bg-gradient-to-br from-purple-700 to-blue-800;
+    }
+    .form-container {
+        @apply flex justify-center px-8 lg:w-4/12 mb-8 lg:mb-0;
+    }
+    .form {
+        @apply mt-10 lg:mt-24 w-full;
+    }
+    .form-caption {
+        @apply text-2xl font-main font-semibold mb-3 text-blue-800;
+    }
+    .divider {
+        @apply h-px w-full bg-gray-100 mb-7;
+    }
+    .input-container {
+        @apply w-full mb-6;
+    }
+    .input-container label {
+        @apply text-sm mb-1;
+    }
+    .input-container input {
+        @apply w-full text-sm py-3 px-2.5 border border-gray-200 rounded focus:ring-offset-2 focus:ring-offset-blue-700 transition-all duration-150;
+    }
+    .action-button {
+        @apply text-lg font-semibold text-white py-3 w-full rounded bg-blue-700 hover:bg-blue-800 transition-all duration-150;
+    }
+    .subtext {
+        @apply text-center text-sm mt-3;
+    }
+    .subtext-route {
+        @apply text-sm font-semibold text-blue-800 hover:text-blue-900 transition-all duration-150;
+    }
+    .error-msg {
+        @apply text-sm text-red-700 mt-2
+    }
+}

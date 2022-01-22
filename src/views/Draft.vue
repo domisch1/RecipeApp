@@ -1,57 +1,34 @@
 <template>
-  <section id="draft">
+  <section>
     <navbar></navbar>
     <section class="container-wrapper">
       <h2 class="caption">Draft your week</h2>
-      <div class="flex flex-col sm:items-end sm:flex-row mb-2">
-        <div class="">
-          <span class="font-main text-base">Start date</span>
+      <h3 class="text-xl" v-if="this.$store.state.recipes.length === 0">
+        You need to add recipes first before you can start the draft!
+      </h3>
+      <div
+        class="flex flex-col sm:items-end sm:flex-row mb-2"
+        v-if="this.$store.state.recipes.length > 0"
+      >
+        <div>
+          <span>Start date</span>
           <datepicker
             v-model="dateStart"
             :upper-limit="dateEnd"
-            class="
-              py-2
-              px-3
-              border border-gray-200
-              rounded
-              cursor-pointer
-              w-full
-              sm:w-auto
-            "
+            class="py-2 px-3 border border-gray-200 rounded cursor-pointer w-full sm:w-auto"
           ></datepicker>
         </div>
         <div class="sm:mx-2 my-4 sm:my-0">
-          <span class="font-main text-base">End date</span>
+          <span>End date</span>
           <datepicker
             v-model="dateEnd"
             :lower-limit="dateStart"
-            class="
-              py-2
-              px-3
-              border border-gray-200
-              rounded
-              cursor-pointer
-              w-full
-              sm:w-auto
-            "
+            class="py-2 px-3 border border-gray-200 rounded cursor-pointer w-full sm:w-auto"
           ></datepicker>
         </div>
         <div class="sm:w-40">
           <button
-            class="
-              h-[42px]
-              font-main
-              text-base
-              font-semibold
-              bg-green-600
-              hover:bg-green-700
-              transition-all
-              duration-150
-              cursor-pointer
-              w-full
-              rounded
-              text-white
-            "
+            class="h-[42px] text-base font-semibold bg-green-600 hover:bg-green-700 transition-all duration-150 cursor-pointer w-full rounded text-white"
             @click="startDraft"
           >
             Draft
@@ -59,7 +36,7 @@
         </div>
       </div>
       <p
-        class="text-sm text-red-700 mb-6 font-main"
+        class="text-sm text-red-700 mb-6"
         v-if="this.$store.getters.draftDisabled"
       >
         You don't have enough different Recipes for this amount of days. Please
@@ -69,7 +46,7 @@
         v-for="(recipe, index) in this.$store.state.draftedRecipes"
         :key="index"
       >
-        <span class="font-main font-semibold text-lg"> {{ recipe.date }} </span>
+        <span class="font-semibold text-lg"> {{ recipe.date }} </span>
         <recipe>
           <template v-slot:recipe-name>
             {{ recipe.name }}
@@ -81,9 +58,9 @@
             {{ recipe.category }}
           </template>
           <template v-slot:table-container>
-            <div class="table w-full font-main mb-4">
-              <div class="table-row-group">
-                <div class="table-row bg-gray-800">
+            <div class="table w-full mb-4">
+              <div class="table-row-group gradient-dark">
+                <div class="table-row">
                   <div
                     class="table-cell text-center font-semibold text-white py-2"
                   >
@@ -97,11 +74,11 @@
                 </div>
               </div>
               <div
-                class="table-row-group"
+                class="table-row-group gradient-light"
                 v-for="(ingredient, index) in recipe.list"
                 :key="index"
               >
-                <div class="table-row bg-gray-100">
+                <div class="table-row">
                   <div class="table-cell text-center py-2">
                     {{ ingredient.ingredient }}
                   </div>
@@ -140,16 +117,10 @@ export default {
   },
   methods: {
     startDraft() {
-      // cleanDraftedRecipes
-      // createDraftedRecipe
       this.$store.dispatch("cleanDraftedRecipes", {
         dateStart: this.dateStart,
         dateEnd: this.dateEnd,
       });
-      // this.$store.commit("createDraft", {
-      //   dateStart: this.dateStart,
-      //   dateEnd: this.dateEnd,
-      // });
     },
   },
 };

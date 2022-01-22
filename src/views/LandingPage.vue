@@ -2,55 +2,25 @@
   <section id="landing-page">
     <section
       id="cover"
-      class="
-        flex flex-col
-        justify-center
-        items-center
-        w-screen
-        h-96
-        bg-gray-200
-        px-8
-        py-16
-      "
+      class="flex flex-col justify-center items-center w-screen h-96 bg-gray-200 px-8 py-16"
     >
       <h1 class="font-main text-3xl font-semibold mb-8 text-center">
         Make your life easyer by using this amazing App!
       </h1>
       <p class="font-main text-base text-center w-auto sm:w-96 mb-10">
-        A must have for everyone who want’s to cook by their own and save lots
+        A must have for everyone who want's to cook by their own and save lots
         of time
       </p>
       <router-link
         to="/signup"
-        class="
-          py-3
-          font-main font-semibold
-          w-full
-          sm:w-80
-          rounded
-          text-base
-          bg-black
-          text-white
-          hover:bg-gray-800
-          transition-all
-          duration-150
-          text-center
-        "
+        class="py-3 font-main font-semibold w-full sm:w-80 rounded text-base bg-black text-white hover:bg-gray-800 transition-all duration-150 text-center"
       >
         Register now
       </router-link>
     </section>
     <section
       id="features"
-      class="
-        flex flex-col
-        sm:flex-row
-        justify-around
-        mx-8
-        my-10
-        sm:mx-32
-        flex-wrap
-      "
+      class="flex flex-col sm:flex-row justify-around mx-8 my-10 sm:mx-32 flex-wrap"
     >
       <div class="feature-container">
         <img src="../assets/Icons/Clock.svg" alt="Clock" class="feature-img" />
