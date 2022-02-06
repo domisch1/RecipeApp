@@ -17,7 +17,7 @@
             :key="index"
             :class="{ 'opacity-50': item.checked }"
           >
-            <div class="table-row gradient-light">
+            <div class="table-row bg-gray-100">
               <div class="table-cell text-center py-3">
                 {{ item.ingredient }}
               </div>

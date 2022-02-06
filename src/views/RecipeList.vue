@@ -20,27 +20,23 @@
           {{ recipe.category }}
         </template>
         <template v-slot:table-container>
-          <div class="table w-full font-main mb-4">
-            <div class="table-row-group">
-              <div class="table-row gradient-dark">
-                <div
-                  class="table-cell text-center font-semibold text-white py-2"
-                >
+          <div class="table w-full font-main mb-4 text-black">
+            <div class="table-row-group bg-gray-300">
+              <div class="table-row">
+                <div class="table-cell text-center font-semibold border-b py-2">
                   Ingredient
                 </div>
-                <div
-                  class="table-cell text-center font-semibold text-white py-2"
-                >
+                <div class="table-cell text-center font-semibold py-2">
                   Amount
                 </div>
               </div>
             </div>
             <div
-              class="table-row-group"
+              class="table-row-group bg-gray-100"
               v-for="(ingredient, index) in recipe.list"
               :key="index"
             >
-              <div class="table-row gradient-light">
+              <div class="table-row">
                 <div class="table-cell text-center py-2">
                   {{ ingredient.ingredient }}
                 </div>

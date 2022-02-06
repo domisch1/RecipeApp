@@ -124,9 +124,9 @@
         </button>
       </div>
       <div class="form-row" v-if="recipe.list.length > 0">
-        <div class="w-full">
+        <div class="w-full text-black">
           <div class="table w-full mb-6">
-            <div class="table-row-group font-semibold gradient-dark">
+            <div class="table-row-group font-semibold bg-gray-300">
               <div class="table-row text-center">
                 <div class="table-cell py-3">Ingredients</div>
                 <div class="table-cell py-3">Amount</div>
@@ -134,7 +134,7 @@
             </div>
             <div class="table-row-group">
               <div
-                class="table-row text-center gradient-light"
+                class="table-row text-center bg-gray-100"
                 v-for="(ingredients, index) in recipe.list"
                 :key="index"
               >
@@ -187,14 +187,16 @@ export default {
       this.amount = "";
     },
     sendRecipe() {
-      this.$store.dispatch("createRecipe", this.recipe);
-      this.recipe = {
-        name: "",
-        category: "",
-        duration: "",
-        list: [],
-        description: "",
-      };
+      if (this.recipe.name !== "") {
+        this.$store.dispatch("createRecipe", this.recipe);
+        this.recipe = {
+          name: "",
+          category: "",
+          duration: "",
+          list: [],
+          description: "",
+        };
+      }
     },
     checkRecipeName() {
       if (this.recipe.name.length === 0) {

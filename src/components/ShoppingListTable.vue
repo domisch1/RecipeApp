@@ -1,7 +1,7 @@
 <template>
   <div class="table w-full font-main">
     <div class="table-row-group">
-      <div class="table-row font-semibold gradient-dark">
+      <div class="table-row font-semibold bg-gray-300">
         <div class="table-cell-centered">Ingredient</div>
         <div class="table-cell-centered">Amount</div>
         <div class="table-cell-centered">Checked</div>
